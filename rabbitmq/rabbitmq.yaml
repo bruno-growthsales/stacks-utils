@@ -6,6 +6,7 @@ x-variaveis: &variaveis
 services:
   rabbitmq:
     image: rabbitmq:3.11-management
+    hostname: rabbitmq
     environment:
       <<: *variaveis
     #ports:
@@ -13,6 +14,9 @@ services:
     #  - 15672:15672
     #  - 5672:5672
     #  - 4369:4369
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+      # - rabbitmq_config:/etc/rabbitmq
     networks:
       - externa
       - interna
@@ -24,7 +28,11 @@ services:
         traefik.http.services.rabbitmq.loadbalancer.server.port: 15672
         traefik.http.routers.rabbitmq.service: "rabbitmq"
         traefik.http.routers.rabbitmq.rule: "Host(`${SUBDOMAIN:-rabbitmq}.${DOMAIN:-seudominio.com.br}`)"
-
+volumes:
+  rabbitmq_data:
+    external: true
+    name: rabbitmq_data
+  # rabbitmq_config:
 networks:
   externa:
     external: true
