@@ -1,157 +1,101 @@
-# Stacks Incríveis
+# Stack Utils
 
-Faça o deploy de mais de 10+ open-source apps usando os templates do Portainer ou com um único comando. E para quem quer segurança com suporte a secrets do docker.
+Uma coleção de templates Docker Compose e Portainer para deploy fácil de mais de 10 aplicativos open-source.
 
-> [!TIP]
-> Sem necessidade de gerenciar .envs, mas com opção ainda disponivel para quem precisar
+## Visão Geral
+- Deploy via Portainer ou Docker Swarm com um único comando.
+- Suporte a Docker Secrets e arquivos `.env` opcionais.
+- Compatibilidade com GlusterFS, Ceph e NFS (use `VOLUME_PATH=/mnt/`).
 
-> [!TIP]
-> Compatibilidade com (GlusterFS, Ceph, NFS) usando `VOLUME_PATH=/mnt/`
+## Destaques
+- **Implantação Simplificada**: comandos únicos, sem digitar credenciais toda vez.
+- **Pronto para Produção**: semi-configurado para Swarm e Portainer.
+- **Documentação em Português**: detalhes de cada variável e instruções passo a passo.
+- **Open Source**: contribuições e pull requests são bem-vindos.
 
-> [!TIP]
-> Já prontas para instalação via comando DOMAIN=subdominio.seudominio.com e com diponibilidade do arquivo .env.
+---
 
-> [!WARNING]
-> Guarde suas chaves em um local seguro.
+## Variáveis de Ambiente
+Defina variáveis para automatizar configurações sem precisar editar arquivos de compose:
 
-## Stacks prontas pra você implantar na sua VPS com poucos cliques. 
+| Variável       | Descrição                                                         | Exemplo                         |
+| -------------- | ----------------------------------------------------------------- | ------------------------------- |
+| `DOMINIO`      | Domínio principal                                                 | `seudominio.com.br`             |
+| `ACME_EMAIL`   | Email para certificados Let's Encrypt                              | `email@dominio.com`             |
+| `SMTP_SENDER`  | Email remetente de notificações                                   | `nao-responda@dominio.com`      |
+| `SMTP_SERVER`  | Endereço do servidor SMTP                                         | `smtp.gmail.com`                |
+| `SMTP_USER`    | Usuário de autenticação SMTP                                      | `usuario@gmail.com`             |
+| `SMTP_PASSWORD`| Senha ou senha de app SMTP                                        | `S3nh@Segura`                   |
+| `NUMBER`       | Sufixo de instância (–1, –2, etc.); padrão: `-1`                 | `-1`                            |
+| `VERSION`      | Versão do container; padrão: última estável                       | `latest`                        |
+| `TRUSTED_IPS`  | IPs permitidos para conexões (padrão: localhost)                  | `192.168.0.0/24`                |
 
-Chega de ficar procurando no google por arquivos do docker compose para implantar no seu servidor
+> **Dica:** em produção, prefira Docker Secrets para variáveis sensíveis.
 
-Aplicativos configurados e personalizados ao máximo para implantação em pouquissimos passos.
+---
 
-- **Aberto para contribuição** - Qualquer pessoa pode mandar os requests e consertar erros e fornecer atualizações para as versões das aplicações.
-- **Implantação simples** - Stacks prontas, com documentação e detalhes sobre cada variável em português.
-- **Compatibilidade com Swarm e Portainer** - Templates prontos para produção com tudo semi configurado para deploy em servidores pronto para uso.
+## Primeiros Passos
 
-## Primeiros passos
-
-### Documentação para noobs e intermediários em docker compose
-
-São usadas variáveis para que você economize tempo ao setar vários aplicativos e não precise digitar seu email ou senha todas as vezes que for fazer o deploy de uma stack.
-
-<details><summary>Veja aqui as variáveis padrão do one click stacks.</summary>
-
-- **DOMINIO** - Seu dominio padrão. Ex: seudominio.com.br
-- **ACME_EMAIL** - Email usado para aquisição dos certificados Let's Encrypt. SUPER IMPORTANTE
-- **SMTP_SENDER** - Email que irá aparecer quando se envia um email novo pelo servidor. Ex: <nao-responda@gmail.com>
-- **SMTP_SERVER** - Endereço do servidor SMTP que irá enviar os emails. Ex: gmail.smtp.com ou mail.seudominio.com
-- **SMTP_USER** - Usuário que ira logar no servidor SMTP, normalmente é seu email principal. Ex: <seuemail@gmail.com>
-- **SMTP_PASSWORD** - Senha do seu email ou senha de aplicativo. [Saiba mais sobre senhas de aplicativo](https://atendimento.tecnospeed.com.br/hc/pt-br/articles/4418115119127-Como-criar-senha-de-aplicativo-para-email)
-- **NUMBER** - Uma aplicação pode ter varias instancias rodando, -1 -2 -3 -4, se não alterada o padrão será -1. Ex: Portainer-1
-- **VERSION** - A versão da aplicação a ser usada no container, se não alterada será usada a ultima versão estável do aplicativo.
-- **TRUSTED_IPS** - IP dos servidores que vão se conectar a suas aplicações, se não alterado o padrão sera somente o localhost.
-
-</details>
-
-Recomendado somente o uso de variáveis em senhas para testes ou desenvolvimento, estou adicionando suporte a secrets por padrão para que você tenha mais segurança no deploy, como uso com clientes essas stacks, achei necessário adicionar o suporte a elas.
-
-Variáveis também serão disponibilizadas em arquivos .env para maior controle para quem quiser implantar pelo docker stack compose ou via interface web do Portainer.
-
-## Preparando tudo
-
-No ambiente de deploy, ou seja, fora dos testes recomendo fortemente o uso de secrets, que normalmente .
-
-### 1. Deploy Docker
-
-Instalar dependências:
-
+### 1. Instalar Docker e Dependências
 ```bash
 sudo apt-get update
-sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+sudo apt-get install -y ca-certificates curl gnupg lsb-release
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-Instalar o docker:
-
-```bash
- sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-```
-
-Criar o ambiente swarm:
-
+### 2. Inicializar Swarm e Rede Traefik
 ```bash
 docker swarm init
-docker network create --driver=overlay traefik-public
+docker network create --driver overlay traefik-public
 ```
 
-[Documentação Docker](https://docs.docker.com/engine/install/ubuntu/)
-
-### 2. Deploy Portainer e Traefik
-
-> [!NOTE]
-> Usamos o Portainer como padrão então ele é a única stack que precisa ser instalada via linha de comando.
-
-Acessar sua pasta de usuário:
-
-```bash
-cd ~
-```
-
-Clonar o repositório:
-
+### 3. Clonar o Repositório
 ```bash
 git clone https://github.com/bruno-growthsales/stack-utils.git
+cd stack-utils
 ```
 
-Acessar a pasta do repositório:
-
-```bash
-cd stacks-utils
-```
-
+### 4. Deploy do Portainer
 ```bash
 SUBDOMINIO=portainer \
 DOMINIO=seudominio.com.br \
-docker stack deploy -c portainer/portainer.yml superstack
+  docker stack deploy -c chatwoot/portainer.yml superstack
 ```
 
-### 3. Cheque se as portais HTTP and HTTPS estão expostas pelo Traefik
-
+### 5. Verificar Exposição de Portas
 ```bash
 curl https://ipv4.am.i.mullvad.net/port/80
 curl https://ipv4.am.i.mullvad.net/port/443
 ```
 
-### 4. Acesse o portainer
+### 6. Acessar Portainer
+- Acesse `http://<VPS_IP>:9000` para configurar Traefik e gerenciar stacks.
 
-> [!WARNING]
-> Seu portainer ainda não estará exposto em subdominio por que o Traefik não foi instalado ainda, mas está pré configurado na porta **vps_ip:9000**, acesse ele para instalar o Traefik e outras stacks.
-
-### 5. Faça o deploy das Stacks Incriveis
-
-A Stacks Incriveis segue a seguinte estrutura nesse repositório.
-
-1. Repositório
-   - Pasta da stack
-     - stack.yml
-     - .env
-
-### Templates
-
-> [!WARNING]
-> Na stack do portainer já tem uma configuração que as stacks são vinculadas com o arquivo templates.json da Stacks Incriveis, caso voce já tenha pré instalado o Portainer terá que adicionar o link do template json as configurações do seu Portainer em Settings > App templates e colar a url do arquivo [templates.json](https://raw.githubusercontent.com/matheusmaiberg/one-click-stacks/main/templates.json).
-
-Acesse App Templates > Copy as Custom > Create custom template > Stacks > Add stack > Custom Template
-
-Via comando CLI:
-
+### 7. Deploy das Stacks
+Para cada stack:
 ```bash
-DOMAIN=<subdominio.meudominio.com.br> docker stack deploy -c <stack.yml> <nome_da_aplicação>
+DOMAIN=subdominio.dominio.com.br \
+  docker stack deploy -c stacks/<nome_da_stack>.yml <nome_da_stack>
 ```
-
 Exemplo:
-
 ```bash
-DOMAIN=n8n.seudominio.com.br docker stack deploy -c stacks/n8n.yml n8n
+DOMAIN=n8n.seudominio.com.br docker stack deploy -c n8n/n8n.yml n8n
 ```
 
-## Copiando as stacks dretamente pelo portainer
+---
 
-Na stack do container já tem uma configuração que as stacks são vinculadas com o arquivo templates.json da one click stacks.
+## Templates no Portainer
+1. No Portainer, vá em **Settings > App Templates**.
+2. Adicione a URL:
+   `https://raw.githubusercontent.com/matheusmaiberg/one-click-stacks/main/templates.json`
+3. Crie templates personalizados para facilitar o deploy via interface.
 
-Você pode acessar as stacks de dentro do portainer, facilitando ainda mais o deploy e também garante que todas stacks estejam sempre atualizadas.
-![](https://user-images.githubusercontent.com/119268809/209490086-f20a83fc-a7bb-4684-a6fa-d712bc17b48e.png)
+---
+
+## Contribuições
+- Envie pull requests para melhorias, correções e atualizações de versão.
+- Abra issues para reportar problemas ou sugerir recursos.
+
+---
+
+*Licença MIT*
