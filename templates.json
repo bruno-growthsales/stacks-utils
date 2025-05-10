@@ -15,7 +15,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "dozzle/dozzle.yml"
       },
       "env": [
@@ -51,7 +51,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "grafana/grafana.yaml"
       },
       "env": [
@@ -86,7 +86,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "postgres/postgres.yaml"
       },
       "env": [
@@ -145,7 +145,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "pgbouncer/pgbouncer.yaml"
       },
       "env": [
@@ -172,7 +172,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "rabbitmq/rabbitmq.yaml"
       },
       "env": [
@@ -223,7 +223,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "redis/redis.yaml"
       },
       "env": [
@@ -242,7 +242,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "minio/minio.yaml"
       },
       "env": [
@@ -301,7 +301,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "chatwoot/chatwoot.yaml"
       },
       "env": [
@@ -360,7 +360,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "n8n/n8n.yml"
       },
       "env": [
@@ -445,7 +445,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "evolution/evolution.yaml"
       },
       "env": [
@@ -528,7 +528,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "pdf/pdf.yaml"
       },
       "env": [
@@ -579,7 +579,7 @@
       ],
       "platform": "linux",
       "repository": {
-        "url": "https://github.com/gustavo9br/Stacks-Incriveis",
+        "url": "https://github.com/bruno-growthsales/stack-utils",
         "stackfile": "directus/directus.yaml"
       },
       "env": [

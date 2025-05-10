@@ -24,13 +24,13 @@ Para funcionar 100% o Chatwoot precisa de várias configurações desde banco de
    - SMTP para envio de emails (Gmail para testes, Amazon SES para produção)
    - Open AI secret key para copiloto
    - Google Auth para botão na tela de login, precisa de configurar a [tela de consentimento](https://console.cloud.google.com/apis/credentials/consent) e [credenciais](https://console.cloud.google.com/apis/credentials)
-   - Logotipos usando os mesmos tamanhos e nomes da [pasta public](https://github.com/matheusmaiberg/Stacks-Incriveis/tree/main/chatwoot/public).
+   - Logotipos usando os mesmos tamanhos e nomes da [pasta public](https://github.com/bruno-growthsales/stack-utils/tree/main/chatwoot/public).
 
 ## Instalação
 
-Copie o conteudo da stack do [Chatwoot](https://github.com/matheusmaiberg/Stacks-Incriveis/blob/main/chatwoot/chatwoot.yml) para seu Portainer.
+Copie o conteudo da stack do [Chatwoot](https://github.com/bruno-growthsales/stack-utils/blob/main/chatwoot/chatwoot.yml) para seu Portainer.
 
-Arrume as credenciais e configurações de acordo com o arquivo [.env](https://github.com/matheusmaiberg/Stacks-Incriveis/blob/main/chatwoot/chatwoot.yml)
+Arrume as credenciais e configurações de acordo com o arquivo [.env](https://github.com/bruno-growthsales/stack-utils/blob/main/chatwoot/chatwoot.yml)
 
 ### Deploy em 2 passos
 
@@ -72,11 +72,11 @@ services:
 
 ## Personalização
 
-A stack já está pré configurada para receber personalizações de logotipo e marcas com a `INSTALLATION_NAME` sendo a variável usada para mudar o nome da sua instalação do chatwoot, e um segundo mapeamento `/root/Stacks-Incriveis/chatwoot/public:/app/public` para mapear a pasta public que tem arquivos de logotipo para dentro do seu container docker.
+A stack já está pré configurada para receber personalizações de logotipo e marcas com a `INSTALLATION_NAME` sendo a variável usada para mudar o nome da sua instalação do chatwoot, e um segundo mapeamento `/root/stacks-utils/chatwoot/public:/app/public` para mapear a pasta public que tem arquivos de logotipo para dentro do seu container docker.
 
-> Aonde `/root/Stacks-Incriveis/chatwoot/public:/app/public` se traduz em um volume mapeado dividido em duas partes:
+> Aonde `/root/stacks-utils/chatwoot/public:/app/public` se traduz em um volume mapeado dividido em duas partes:
 > 
-> `/root/Stacks-Incriveis/chatwoot/public` é a pasta que tem os arquivos na sua VPS.
+> `/root/stacks-utils/chatwoot/public` é a pasta que tem os arquivos na sua VPS.
 > `:/app/public` é o mapeamento interior do container em que será enviado seus arquivos para uso do docker quando estiver ativo o container.
 
 > [!WARNING]
@@ -96,7 +96,7 @@ services:
     volumes:
       - chatwoot_data:/app/storage
       # Pasta com os arquivos do frontend (favicon, logo e outras)
-       - /root/Stacks-Incriveis/chatwoot/public:/app/public # Com a pasta descomentada você pode apontar para dentro do seu servidor o caminho da pasta public com sua logotipo
+       - /root/stacks-utils/chatwoot/public:/app/public # Com a pasta descomentada você pode apontar para dentro do seu servidor o caminho da pasta public com sua logotipo
   [...] # Outras configurações da imagem
 ```
 

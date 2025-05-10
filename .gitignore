@@ -1,15 +1,2 @@
-temp.json
-.devcontainer/devcontainer.json
-n8n/.env-server
-pt-BR.json
-backups
-all stacks
+# IDE
 .vscode
-ghost
-n8n
-nocodb
-passbolt
-wppconnect
-all stacks
-backups
-Typebot

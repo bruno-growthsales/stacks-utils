@@ -94,13 +94,13 @@ cd ~
 Clonar o repositório:
 
 ```bash
-git clone https://github.com/matheusmaiberg/Stacks-Incriveis.git
+git clone https://github.com/bruno-growthsales/stack-utils.git
 ```
 
 Acessar a pasta do repositório:
 
 ```bash
-cd Stacks-Incriveis
+cd stacks-utils
 ```
 
 ```bash
