@@ -14,7 +14,7 @@ services:
         traefik.enable: "true"
         traefik.http.routers.grafana.service: "grafana"
         traefik.http.services.grafana.loadbalancer.server.port: "3000"
-        traefik.http.routers.grafana.rule: "Host(`${SUBDOMAIN}.${DOMAIN}`)"
+        traefik.http.routers.grafana.rule: "Host(`${SUBDOMAIN}.${DOMAIN}`, `www.${SUBDOMAIN}.${DOMAIN}`)"
         traefik.http.routers.grafana.tls: "true"
         traefik.http.routers.grafana.tls.certresolver: "letsencryptresolver"
         traefik.http.routers.grafana.entrypoints: "websecure"
