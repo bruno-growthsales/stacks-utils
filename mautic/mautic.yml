@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mautic:
-    image: mautic/mautic:v4
+    image: mautic/mautic:${VERSION:-v4}
     volumes:
       - mautic_data:/var/www/html
     networks:
@@ -14,12 +14,12 @@ services:
       # Banco de dados
       MAUTIC_DB_HOST: "mariadb"
       MAUTIC_DB_USER: "root"
-      MAUTIC_DB_PASSWORD: "SENHA DA DB"
+      MAUTIC_DB_PASSWORD: "${SENHA_MARIADB}"
       MAUTIC_DB_NAME: "mautic"
       # Admin
-      MAUTIC_URL: "https://mautic.groufy.com.br"
+      MAUTIC_URL: "https://${SUBDOMAIN}.${DOMAIN}"
       MAUTIC_ADMIN_EMAIL: "matheus@groufy.com.br"
-      MAUTIC_ADMIN_PASSWORD: "SUASENHA"
+      MAUTIC_ADMIN_PASSWORD: "${SENHA_MAUTIC}"
       # Configs da instalação
       MAUTIC_RUN_CRON_JOBS: "true"
       # MAUTIC_CRON_HUBSPOT: 
@@ -37,10 +37,10 @@ services:
           memory: 2048M
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.mautic.rule=Host(`mautic.groufy.com.br`)"
+        - "traefik.http.routers.mautic.rule=Host(`${SUBDOMAIN}.${DOMAIN}`, `www.${SUBDOMAIN}.${DOMAIN}`)"
         - "traefik.http.routers.mautic.service=mautic"
         - "traefik.http.routers.mautic.entrypoints=websecure"
-        - "traefik.http.routers.mautic.tls.certresolver=le"
+        - "traefik.http.routers.mautic.tls.certresolver=letsencryptresolver"
         - "traefik.http.routers.mautic.tls=true"
         - "traefik.http.services.mautic.loadbalancer.server.port=80"
  
