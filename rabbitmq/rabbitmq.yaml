@@ -27,7 +27,7 @@ services:
         traefik.http.routers.rabbitmq.tls.certresolver: "letsencryptresolver"
         traefik.http.services.rabbitmq.loadbalancer.server.port: 15672
         traefik.http.routers.rabbitmq.service: "rabbitmq"
-        traefik.http.routers.rabbitmq.rule: "Host(`${SUBDOMAIN:-rabbitmq}.${DOMAIN:-seudominio.com.br}`)"
+        traefik.http.routers.rabbitmq.rule: "Host(`${SUBDOMAIN:-rabbitmq}.${DOMAIN:-seudominio.com.br}`, `www.${SUBDOMAIN:-rabbitmq}.${DOMAIN:-seudominio.com.br}`)"
 volumes:
   rabbitmq_data:
     external: true
