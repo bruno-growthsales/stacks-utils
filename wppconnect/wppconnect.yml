@@ -15,7 +15,7 @@ services:
         ### Ativar traefik para fazer o proxy reverso
         - traefik.enable=true
         # Dominio do frontend e Traefik + SSL 
-        - traefik.http.routers.wppconnect-${NUMBER:-1}.rule=Host(`${DOMINIO:-wppconnect.dominio.com.br}`)
+        - traefik.http.routers.wppconnect-${NUMBER:-1}.rule=Host(`${DOMINIO:-wppconnect.dominio.com.br}`, `www.${DOMINIO:-wppconnect.dominio.com.br}`)
         - traefik.http.routers.wppconnect-${NUMBER:-1}.entrypoints=${SCHEME:-https}
         - traefik.http.routers.wppconnect-${NUMBER:-1}.service=wppconnect-${NUMBER:-1}
         - traefik.http.routers.wppconnect-${NUMBER:-1}.tls.certresolver=letsencryptresolver
