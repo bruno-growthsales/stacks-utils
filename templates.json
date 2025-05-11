@@ -95,7 +95,7 @@
           "label": "Senha do Postgres",
           "description": "Senha do Postgres.",
           "required": true,
-          "default": "1435BA8E1698F8E4FD72762AD3F86",
+          "default": "98F8E4FD72762AD3F861435BA8E16",
           "preset": false
         },
         {
@@ -154,7 +154,7 @@
           "label": "Senha do Postgres",
           "description": "Senha do Postgres.",
           "required": true,
-          "default": "1435BA8E1698F8E4FD72762AD3F86",
+          "default": "98F8E4FD72762AD3F861435BA8E16",
           "preset": false
         }
       ]
@@ -318,7 +318,7 @@
           "label": "Chave 32 caracteres",
           "description": "Chave segura gerada com 32 caracteres aleatórios.",
           "required": true,
-          "default": "mpRkYLWmiFRGpayAV0LbA0lPG1nBqQs3",
+          "default": "LWmiFRGpayAV0LbA0lPG1nBqQs3mpRkY",
           "preset": false
         },
         {
@@ -326,7 +326,7 @@
           "label": "Senha do Postgres",
           "description": "Senha do Postgres.",
           "required": true,
-          "default": "1435BA8E1698F8E4FD72762AD3F86",
+          "default": "98F8E4FD72762AD3F861435BA8E16",
           "preset": false
         },
         {
@@ -369,7 +369,7 @@
           "label": "Senha do Postgres",
           "description": "Senha do Postgres.",
           "required": true,
-          "default": "1435BA8E1698F8E4FD72762AD3F86",
+          "default": "98F8E4FD72762AD3F861435BA8E16",
           "preset": false
         },
         {
@@ -486,7 +486,7 @@
           "label": "Senha do Postgres",
           "description": "Senha do Postgres.",
           "required": true,
-          "default": "1435BA8E1698F8E4FD72762AD3F86",
+          "default": "98F8E4FD72762AD3F861435BA8E16",
           "preset": false
         },
         {
@@ -628,7 +628,7 @@
           "label": "Senha do Postgres",
           "description": "Senha do Postgres.",
           "required": true,
-          "default": "1435BA8E1698F8E4FD72762AD3F86",
+          "default": "98F8E4FD72762AD3F861435BA8E16",
           "preset": false
         },
         {
