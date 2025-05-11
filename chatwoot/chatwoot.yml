@@ -2,7 +2,7 @@ version: '3.8'
 
 x-variaveis:
   &variaveis
-    INSTALLATION_NAME: "Sua Empresa"
+    INSTALLATION_NAME: "${NOME_DA_EMPRESA}"
     ENABLE_ACCOUNT_SIGNUP: "false"
     INSTALLATION_ENV: "docker"
     FORCE_SSL: "true"
@@ -68,7 +68,9 @@ services:
     volumes:
       - chatwoot_data:/app/storage
       # Pasta com os arquivos do frontend (favicon, logo e outras)
-      # - /root/apps/chatwoot/public:/app/public
+      - /root/apps/chatwoot/public:/app/public
+      - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
     networks:
       - traefik
       - interna
@@ -82,7 +84,9 @@ services:
     volumes:
       - chatwoot_data:/app/storage
       # Pasta com os arquivos do frontend (favicon, logo e outras)
-      # - /root/apps/chatwoot/public:/app/public
+      - /root/apps/chatwoot/public:/app/public
+      - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
     deploy:
       mode: replicated
       replicas: 1
@@ -94,6 +98,17 @@ services:
 
 volumes:
   chatwoot_data:
+    external: true
+    name: chatwoot_data
+  chatwoot_public:
+    external: true
+    name: chatwoot_public
+  chatwoot_mailer:
+    external: true
+    name: chatwoot_mailer
+  chatwoot_mailers:
+    external: true
+    name: chatwoot_mailers
 
 networks:
   traefik:
