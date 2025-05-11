@@ -42,8 +42,8 @@ x-variaveis:
 # Backend
 services:
   chatwoot:
-    # command: bundle exec rails db:chatwoot_prepare 
-    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    command: bundle exec rails db:chatwoot_prepare 
+    #command: bundle exec rails s -p 3000 -b 0.0.0.0
     environment:
       <<: *variaveis
     image: chatwoot/chatwoot:${VERSION:-v4.1.0}
