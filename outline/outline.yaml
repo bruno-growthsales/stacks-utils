@@ -203,7 +203,7 @@ services:
         traefik.http.routers.outline.rule: "Host(`docs.seudominio.com`)"
         traefik.http.routers.outline.entrypoints: "websecure"
         traefik.http.routers.outline.priority: "1"
-        traefik.http.routers.outline.tls.certresolver: "le"
+        traefik.http.routers.outline.tls.certresolver: "letsencryptresolver"
         traefik.http.routers.outline.service: "outline"
         traefik.http.services.outline.loadbalancer.server.port: 3000
     networks:

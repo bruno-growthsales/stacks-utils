@@ -36,7 +36,7 @@ services:
       labels:
         traefik.enable: "true"
         traefik.http.routers.pga.entrypoints: "websecure"
-        traefik.http.routers.pga.tls.certresolver: "le"
+        traefik.http.routers.pga.tls.certresolver: "letsencryptresolver"
         traefik.http.services.pga.loadbalancer.server.port: 80
         traefik.http.services.pga.loadbalancer.passHostHeader: "true"
         traefik.http.routers.pga.rule: "Host(`${SUBDOMAIN:-pgadmin}.${DOMAIN:-seudominio.com.br}`)"

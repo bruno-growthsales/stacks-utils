@@ -140,7 +140,7 @@ services:
         traefik.http.services.evolution.loadbalancer.passHostHeader: "true"
         traefik.http.routers.evolution.service: "evolution"
         traefik.http.routers.evolution.rule: "Host(`${SUBDOMAIN}.${DOMAIN}`)"
-        traefik.http.routers.evolution.tls.certresolver: "le"
+        traefik.http.routers.evolution.tls.certresolver: "letsencryptresolver"
         traefik.http.routers.evolution.entrypoints: "websecure"
         traefik.http.routers.evolution.tls: "true"
 networks:

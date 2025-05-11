@@ -24,13 +24,13 @@ Para funcionar 100% o Chatwoot precisa de várias configurações desde banco de
    - SMTP para envio de emails (Gmail para testes, Amazon SES para produção)
    - Open AI secret key para copiloto
    - Google Auth para botão na tela de login, precisa de configurar a [tela de consentimento](https://console.cloud.google.com/apis/credentials/consent) e [credenciais](https://console.cloud.google.com/apis/credentials)
-   - Logotipos usando os mesmos tamanhos e nomes da [pasta public](https://github.com/bruno-growthsales/stack-utils/tree/main/chatwoot/public).
+   - Logotipos usando os mesmos tamanhos e nomes da [pasta public](https://github.com/bruno-growthsales/stacks-utils/tree/main/chatwoot/public).
 
 ## Instalação
 
-Copie o conteudo da stack do [Chatwoot](https://github.com/bruno-growthsales/stack-utils/blob/main/chatwoot/chatwoot.yml) para seu Portainer.
+Copie o conteudo da stack do [Chatwoot](https://github.com/bruno-growthsales/stacks-utils/blob/main/chatwoot/chatwoot.yml) para seu Portainer.
 
-Arrume as credenciais e configurações de acordo com o arquivo [.env](https://github.com/bruno-growthsales/stack-utils/blob/main/chatwoot/chatwoot.yml)
+Arrume as credenciais e configurações de acordo com o arquivo [.env](https://github.com/bruno-growthsales/stacks-utils/blob/main/chatwoot/chatwoot.yml)
 
 ### Deploy em 2 passos
 

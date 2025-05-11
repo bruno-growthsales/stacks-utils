@@ -21,7 +21,7 @@ services:
         traefik.http.routers.pdf.service: "pdf" 
         traefik.http.routers.pdf.rule: "Host(`${SUBDOMAIN:-pdf}.${DOMAIN:-seudominio.com.br}`)"
         traefik.http.routers.pdf.entrypoints: "websecure"
-        traefik.http.routers.pdf.tls.certresolver: "le"
+        traefik.http.routers.pdf.tls.certresolver: "letsencryptresolver"
         traefik.http.services.pdf.loadbalancer.server.port: 8080
         traefik.http.services.pdf.loadbalancer.passHostHeader: "true"
     networks:

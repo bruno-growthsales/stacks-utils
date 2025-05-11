@@ -31,9 +31,9 @@ services:
       # - --entrypoints.http.http.redirections.entryPoint.scheme=websecure
       # - --entrypoints.http.http.redirections.entrypoint.permanent=true
       # Configurando o letsencrypt para certificados
-      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
-      - --certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL:-admin@example.com}
-      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.letsencryptresolver.acme.tlschallenge=true
+      - --certificatesresolvers.letsencryptresolver.acme.email=${ACME_EMAIL:-admin@example.com}
+      - --certificatesresolvers.letsencryptresolver.acme.storage=/letsencrypt/acme.json
       # - --log.level=DEBUG
     volumes:
       - ${VOLUME_PATH}letsencrypt:/letsencrypt

@@ -63,7 +63,7 @@ services:
        && bundle exec rails db:migrate
     environment:
       <<: *variaveis
-    image: sendingtk/chatwoot:v3.14.1
+    image:  #sendingtk/chatwoot:v3.15.7
     entrypoint: docker/entrypoints/rails.sh
     # Após deploy trocar os comandos comentando, o prepare cria as tabelas do banco de dados e segundo expõe e executa o frontend na porta 3000 do container
     deploy: 
@@ -78,7 +78,7 @@ services:
         - traefik.http.routers.chatwoot.rule=Host(`${SUBDOMAIN}.${DOMAIN}`)
         - traefik.http.services.chatwoot.loadbalancer.server.port=3000
         - traefik.http.routers.chatwoot.entrypoints=websecure
-        - traefik.http.routers.chatwoot.tls.certresolver=le
+        - traefik.http.routers.chatwoot.tls.certresolver=letsencryptresolver
         - traefik.http.services.chatwoot.loadbalancer.passhostheader=true
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.routers.chatwoot.middlewares=sslheader@docker
@@ -94,7 +94,7 @@ services:
   chatwoot_worker: 
     environment: 
       <<: *variaveis
-    image: sendingtk/chatwoot:v3.14.1
+    image: sendingtk/chatwoot:v3.15.7
     command: bundle exec sidekiq -C config/sidekiq.yml
     volumes: 
       - chatwoot_data:/app/storage

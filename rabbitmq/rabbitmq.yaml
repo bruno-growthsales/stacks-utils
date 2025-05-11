@@ -24,7 +24,7 @@ services:
       labels:
         traefik.enable: "true"
         traefik.http.routers.rabbitmq.entrypoints: "websecure"
-        traefik.http.routers.rabbitmq.tls.certresolver: "le"
+        traefik.http.routers.rabbitmq.tls.certresolver: "letsencryptresolver"
         traefik.http.services.rabbitmq.loadbalancer.server.port: 15672
         traefik.http.routers.rabbitmq.service: "rabbitmq"
         traefik.http.routers.rabbitmq.rule: "Host(`${SUBDOMAIN:-rabbitmq}.${DOMAIN:-seudominio.com.br}`)"

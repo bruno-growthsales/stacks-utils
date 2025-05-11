@@ -61,7 +61,7 @@ services:
         - traefik.http.routers.chatwoot-${NUMBER:-1}.rule=Host(`${SUBDOMAIN:-chatwoot}.${DOMAIN:-localhost}`)
         - traefik.http.services.chatwoot-${NUMBER:-1}.loadbalancer.server.port=3000
         - traefik.http.routers.chatwoot-${NUMBER:-1}.entrypoints=${SCHEME:-websecure}
-        - traefik.http.routers.chatwoot-${NUMBER:-1}.tls.certresolver=letsencrypt
+        - traefik.http.routers.chatwoot-${NUMBER:-1}.tls.certresolver=letsencryptresolver
         # resolver problema de websocket
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.routers.chatwoot_app.middlewares=sslheader

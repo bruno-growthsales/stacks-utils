@@ -34,7 +34,7 @@ services:
         traefik.http.routers.service_name.service: "service_name"
         traefik.http.services.service_name.loadbalancer.server.port: 9999
         traefik.http.routers.service_name.rule: "Host(``)"
-        traefik.http.routers.service_name.tls.certresolver: "le"
+        traefik.http.routers.service_name.tls.certresolver: "letsencryptresolver"
         traefik.http.routers.service_name.entrypoints: websecure"
         traefik.http.routers.service_name.tls: "true"
 

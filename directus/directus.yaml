@@ -64,7 +64,7 @@ services:
         traefik.http.routers.directus.rule: "Host(`${SUBDOMAIN:-directus}.${DOMAIN:-seudominio.com.br}`)"
         traefik.http.services.directus.loadbalancer.server.port: "8055"
         traefik.http.routers.directus.entrypoints: "websecure"
-        traefik.http.routers.directus.tls.certresolver: "le"
+        traefik.http.routers.directus.tls.certresolver: "letsencryptresolver"
     networks:
       - externa
       - interna

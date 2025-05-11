@@ -1,4 +1,4 @@
-# Stack Utils
+# Stacks Utils
 
 Uma coleção de templates Docker Compose e Portainer para deploy fácil de mais de 10 aplicativos open-source.
 
@@ -51,8 +51,8 @@ docker network create --driver overlay traefik-public
 
 ### 3. Clonar o Repositório
 ```bash
-git clone https://github.com/bruno-growthsales/stack-utils.git
-cd stack-utils
+git clone https://github.com/bruno-growthsales/stacks-utils.git
+cd stacks-utils
 ```
 
 ### 4. Deploy do Portainer

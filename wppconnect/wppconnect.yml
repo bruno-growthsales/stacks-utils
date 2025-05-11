@@ -18,7 +18,7 @@ services:
         - traefik.http.routers.wppconnect-${NUMBER:-1}.rule=Host(`${DOMINIO:-wppconnect.dominio.com.br}`)
         - traefik.http.routers.wppconnect-${NUMBER:-1}.entrypoints=${SCHEME:-https}
         - traefik.http.routers.wppconnect-${NUMBER:-1}.service=wppconnect-${NUMBER:-1}
-        - traefik.http.routers.wppconnect-${NUMBER:-1}.tls.certresolver=letsencrypt
+        - traefik.http.routers.wppconnect-${NUMBER:-1}.tls.certresolver=letsencryptresolver
         ### Load balancer 
         - traefik.http.services.wppconnect-${NUMBER:-1}.loadbalancer.server.port=3080      
     networks:
