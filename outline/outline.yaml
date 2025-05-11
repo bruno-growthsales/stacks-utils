@@ -14,12 +14,12 @@ services:
       # Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
       SECRET_KEY: 2f285edc6e69c8583d14ab29e38ad20323017b56ce02c2f34b6
       UTILS_SECRET: c468283f0eb340a10b10921164f990c075368c1b945f39860
-      DATABASE_URL: postgres://postgres:sua_senha_super_segura@postgres:5432/outline
+      DATABASE_URL: postgres://postgres:${SENHA_POSTGRES}@postgres:5432/outline
       DATABASE_CONNECTION_POOL_MIN: 
       DATABASE_CONNECTION_POOL_MAX: 
       PGSSLMODE: disable
       REDIS_URL: redis://redis:6379
-      URL: https://docs.seudominio.com
+      URL: https://${SUBDOMAIN:-docs}.${DOMAIN:-seudominio.com.br}
       PORT: 3000
       # See [documentation](docs/SERVICES.md) on running a separate collaboration
       # server, for normal operation this does not need to be set.
@@ -200,7 +200,7 @@ services:
           - node.role == manager
       labels:
         traefik.enable: "true"
-        traefik.http.routers.outline.rule: "Host(`docs.seudominio.com`)"
+        traefik.http.routers.outline.rule: "Host(`${SUBDOMAIN:-docs}.${DOMAIN:-seudominio.com.br}`, `www.${SUBDOMAIN:-docs}.${DOMAIN:-seudominio.com.br}`)"
         traefik.http.routers.outline.entrypoints: "websecure"
         traefik.http.routers.outline.priority: "1"
         traefik.http.routers.outline.tls.certresolver: "letsencryptresolver"
