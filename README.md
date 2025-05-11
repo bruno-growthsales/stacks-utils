@@ -87,7 +87,7 @@ DOMAIN=n8n.seudominio.com.br docker stack deploy -c n8n/n8n.yml n8n
 ## Templates no Portainer
 1. No Portainer, vá em **Settings > App Templates**.
 2. Adicione a URL:
-   `https://raw.githubusercontent.com/matheusmaiberg/one-click-stacks/main/templates.json`
+   `https://raw.githubusercontent.com/bruno-growthsales/one-click-stacks/main/templates.json`
 3. Crie templates personalizados para facilitar o deploy via interface.
 
 ---

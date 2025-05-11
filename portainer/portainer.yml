@@ -16,7 +16,7 @@ services:
       - "9000:9000"
       - "9443:9443"
     ## This is the limit of what shoud be erased. ##
-    command: -H tcp://tasks.agent:9001 --tlsskipverify --templates https://raw.githubusercontent.com/matheusmaiberg/one-click-stacks/main/templates.json
+    command: -H tcp://tasks.agent:9001 --tlsskipverify --templates https://raw.githubusercontent.com/bruno-growthsales/one-click-stacks/main/templates.json
     volumes:
       - ${VOLUME_PATH}portainer:/data
     deploy:
