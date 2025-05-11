@@ -21,7 +21,7 @@ services:
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.http.routers.ghost-${NUMBER:-1}.rule=Host(`${DOMAIN:-localhost}`)
+        - traefik.http.routers.ghost-${NUMBER:-1}.rule=Host(`${DOMAIN:-localhost}`, `www.${DOMAIN:-localhost}`)
         - traefik.http.routers.ghost-${NUMBER:-1}.entrypoints=${SCHEME:-https}
         - traefik.http.routers.ghost-${NUMBER:-1}.service=ghost-${NUMBER:-1}
         - traefik.http.routers.ghost-${NUMBER:-1}.tls.certresolver=letsencryptresolver
@@ -33,7 +33,7 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=myp@ssw0rd
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD_ROOT}
       - DB_MYSQLDB_PORT=3306
       - DB_TYPE=mysql
       - DB_MYSQLDB_HOST=localhost
