@@ -18,7 +18,7 @@ services:
         traefik.enable: "true"
         traefik.http.routers.dozzle.service: "dozzle"
         traefik.http.services.dozzle.loadbalancer.server.port: 8080
-        traefik.http.routers.dozzle.rule: "Host(`${SUBDOMAIN}.${DOMAIN}`)"
+        traefik.http.routers.dozzle.rule: "Host(`${SUBDOMAIN}.${DOMAIN}`, `www.${SUBDOMAIN}.${DOMAIN}`)"
         traefik.http.routers.dozzle.tls: "true"
         traefik.http.routers.dozzle.tls.certresolver: "letsencryptresolver"
         traefik.http.routers.dozzle.entrypoints: "websecure"
