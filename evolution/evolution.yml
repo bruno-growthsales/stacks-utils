@@ -6,7 +6,7 @@ x-variaveis:
     SERVER_PORT: 8080
     SERVER_URL: https://${SUBDOMAIN:-evo}.${DOMAIN:-seudominio.com.br}
     CONFIG_SESSION_PHONE_NAME: Chrome # Firefox | Edge | Opera | Safari
-    CONFIG_SESSION_PHONE_CLIENT: Sua-empresa
+    CONFIG_SESSION_PHONE_CLIENT: ${NOME_DA_EMPRESA}
     # ApiKey Config
     AUTHENTICATION_TYPE: apikey
     AUTHENTICATION_API_KEY: "example-AI5AB2AC5C8AA7AD15AC3DE8C"
@@ -64,7 +64,7 @@ services:
         traefik.enable: "true"
         traefik.http.routers.evolution.service: "evolution"
         traefik.http.services.evolution.loadbalancer.server.port: 8080
-        traefik.http.routers.evolution.rule: "Host(`${SUBDOMAIN:-evo}.${DOMAIN:-seudominio.com.br}`)"
+        traefik.http.routers.evolution.rule: "Host(`${SUBDOMAIN:-evo}.${DOMAIN:-seudominio.com.br}`, `www.${SUBDOMAIN:-evo}.${DOMAIN:-seudominio.com.br}`)"
         traefik.http.routers.evolution.tls.certresolver: "letsencryptresolver"
         traefik.http.routers.evolution.entrypoints: "websecure"
         traefik.http.routers.evolution.tls: "true"
