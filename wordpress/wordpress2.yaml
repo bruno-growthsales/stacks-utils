@@ -19,7 +19,7 @@ services:
       - VIRTUAL_HOST=wordpress2.seudominio.com
       - ADMIN_USER=admin
       - ADMIN_PASS=password124
-      - ADMIN_EMAIL=gustavo9br@gmail.com
+      - ADMIN_EMAIL=test@gmail.com
       - WP_LOCALE=pt_BR
       - PHP_VALUE=max_input_vars=5000
       - PHP_MAX_INPUT_VARS=5000
