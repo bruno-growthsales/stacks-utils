@@ -3,13 +3,15 @@ version: "3.8"
 services:
   postgres:
     # 1) imagem já com pgvector instalado
-    image: pgvector/pgvector
+    image: postgres:16
     command:
-      - postgres
-      - --shared_preload_libraries=pgvector   # 2) carrega extensão
-      - --max_connections=300
-      - --wal_level=minimal
-      - --max_wal_senders=0
+      postgres [
+        --c shared_preload_libraries=pgvector,
+        --shared_preload_libraries=pgvector,   # 2) carrega extensão
+        --max_connections=300,
+        --wal_level=minimal,
+        --max_wal_senders=0,
+      ]
     environment:
       - POSTGRES_PASSWORD=${SENHA_POSTGRES}
       - POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
