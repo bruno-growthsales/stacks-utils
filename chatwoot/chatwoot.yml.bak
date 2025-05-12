@@ -8,7 +8,7 @@ x-variaveis:
     INSTALLATION_ENV: "docker"
     FORCE_SSL: "true"
     DEFAULT_LOCALE: ${LANGUAGE:-PT_BR}
-  # Secret Key
+    # Secret Key
     SECRET_KEY_BASE: ${SECRET_KEY_BASE:-"chave_hexadecimal_obrigatoria"}  # bundle exec rake secret
     FRONTEND_URL: ${SCHEME:-https}://${DOMAIN:-chatwoot.localhost}
     NODE_ENV: ${NODE_ENV:-production}
