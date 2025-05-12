@@ -39,7 +39,7 @@ x-variaveis: &variaveis
   # OPENAI_API_KEY: ${OPENAI:-sk-exampleopenaiapikey}
 
   # Servidor de Email Brevo
-  MAILER_SENDER_EMAIL: "Chat - Zapefy <noreply@zapefy.com>"
+  MAILER_SENDER_EMAIL: "Chat - ${SUA_EMPRESA} <noreply@${DOMAIN}>"
   SMTP_DOMAIN: "smtp-brevo.com"
   SMTP_ADDRESS: "smtp-relay.brevo.com"
   SMTP_PORT: '587'
@@ -47,7 +47,7 @@ x-variaveis: &variaveis
   SMTP_PASSWORD: "${SMTP_PASSWORD}"
   SMTP_ENABLE_STARTTLS_AUTO: 'true'
   SMTP_OPENSSL_VERIFY_MODE: 'peer'
-  MAILER_INBOUND_EMAIL_DOMAIN: "noreply@zapefy.com"
+  MAILER_INBOUND_EMAIL_DOMAIN: "noreply@${DOMAIN}"
 
   # Botão AUTH Google na tela de login
   # GOOGLE_OAUTH_CLIENT_ID: ${G_CLIENT_ID:-example.apps.googleusercontent.com}
@@ -69,7 +69,7 @@ services:
       # Pasta com os arquivos do frontend (favicon, logo e outras)
       - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
       - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
-      - /root/custom/chatwoot_hub.rb:/app/lib/chatwoot_hub.rb
+      #- /root/custom/chatwoot_hub.rb:/app/lib/chatwoot_hub.rb ## Arquivo de hub
     networks:
       - externa
       - interna
