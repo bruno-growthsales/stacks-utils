@@ -2,19 +2,17 @@ version: "3.8"
 
 services:
   postgres:
-    # 1) imagem já com pgvector instalado
-    image: postgres:16
+    image: pgvector/pgvector:pg16      # container oficial atualizado
     command:
-      postgres [
-        --c shared_preload_libraries=pgvector,
-        --shared_preload_libraries=pgvector,   # 2) carrega extensão
-        --max_connections=300,
-        --wal_level=minimal,
-        --max_wal_senders=0,
-      ]
+      - postgres
+      - "-c"
+      - "shared_preload_libraries=pgvector"
+      - "--max_connections=300"
+      - "--wal_level=minimal"
+      - "--max_wal_senders=0"
     environment:
       - POSTGRES_PASSWORD=${SENHA_POSTGRES}
-      - POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
     networks:
       - interna
     volumes:
@@ -27,7 +25,6 @@ services:
           cpus: "2"
           memory: 2048M
     configs:
-      # 3) init cria EXTENSION vector
       - source: entrypoint_postgres
         target: /docker-entrypoint-initdb.d/init-db.sh
         mode: 0755
