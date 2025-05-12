@@ -122,7 +122,7 @@ services:
       - CLEAN_STORE_CHATS=true
       - LOG_LEVEL=ERROR,WARN,DEBUG,INFO,LOG,VERBOSE,DARK,WEBHOOKS,WEBSOCKET
     networks:
-      - publica
+      - externa
       - interna
     deploy:
       mode: replicated
@@ -144,7 +144,7 @@ services:
         traefik.http.routers.evolution.entrypoints: "websecure"
         traefik.http.routers.evolution.tls: "true"
 networks:
-  publica:
+  externa:
     name: externa
     external: true
   interna:
