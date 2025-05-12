@@ -36,18 +36,19 @@ x-variaveis: &variaveis
   WEBHOOKS_TRIGGER_TIMEOUT: '40'
 
   # ChatGPT 
-  # OPENAI_API_KEY: ${OPENAI:-sk-exampleopenaiapikey}
+  #OPENAI_API_KEY: ${OPENAI:-sk-exampleopenaiapikey}
 
-  # Servidor de Email Brevo
-  MAILER_SENDER_EMAIL: "Chat - Zapefy <noreply@zapefy.com>"
-  SMTP_DOMAIN: "smtp-brevo.com"
-  SMTP_ADDRESS: "smtp-relay.brevo.com"
-  SMTP_PORT: '587'
-  SMTP_USERNAME: "${SMTP_USERNAME}"
-  SMTP_PASSWORD: "${SMTP_PASSWORD}"
-  SMTP_ENABLE_STARTTLS_AUTO: 'true'
-  SMTP_OPENSSL_VERIFY_MODE: 'peer'
-  MAILER_INBOUND_EMAIL_DOMAIN: "noreply@zapefy.com"
+  # Servidor de e-mail (Gmail)
+  #MAILER_SENDER_EMAIL: 'Chatwoot <seuemail@gmail.com>'
+  #SMTP_DOMAIN: gmail.com
+  #SMTP_ADDRESS: smtp.gmail.com
+  #SMTP_PORT: '587'
+  #SMTP_USERNAME: seuemail@gmail.com
+  #SMTP_PASSWORD: suasenha
+  #SMTP_AUTHENTICATION: login
+  #SMTP_ENABLE_STARTTLS_AUTO: 'true'
+  #SMTP_OPENSSL_VERIFY_MODE: peer
+  #MAILER_INBOUND_EMAIL_DOMAIN: seuemail@gmail.com
 
   # Botão AUTH Google na tela de login
   # GOOGLE_OAUTH_CLIENT_ID: ${G_CLIENT_ID:-example.apps.googleusercontent.com}
@@ -57,10 +58,7 @@ x-variaveis: &variaveis
 services:
   chatwoot:
     image: chatwoot/chatwoot:v4.1.0
-    command: >
-      sh -c "bundle exec rails db:chatwoot_prepare &&
-             bundle exec rails s -p 3000 -b 0.0.0.0 &&
-             bundle exec rails db:migrate"
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
     #command: >
     #  sh -c "bundle exec rails db:chatwoot_prepare
     #  && bundle exec rails s -p 3000 -b 0.0.0.0
@@ -74,7 +72,7 @@ services:
       - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
       - /root/custom/chatwoot_hub.rb:/app/lib/chatwoot_hub.rb
     networks:
-      - externa
+      - traefik
       - interna
 
     environment:
@@ -112,7 +110,6 @@ services:
       - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
       - /root/custom/chatwoot_hub.rb:/app/lib/chatwoot_hub.rb
     networks:
-      - externa
       - interna
     environment:
       <<: *variaveis
@@ -142,7 +139,7 @@ volumes:
     name: chatwoot_mailers
 
 networks: 
-  externa: 
+  traefik: 
     external: true
     name: externa
   interna: 
