@@ -3,6 +3,7 @@ version: '3.8'
 x-variaveis:
   &variaveis
     INSTALLATION_NAME: "${NOME_DA_EMPRESA}"
+    VERSION: v4.1.0
     ENABLE_ACCOUNT_SIGNUP: "false"
     INSTALLATION_ENV: "docker"
     FORCE_SSL: "true"

@@ -1,6 +1,7 @@
 x-variaveis:
   &variaveis
     INSTALLATION_NAME: "${SUA_EMPRESA}"
+    VERSION: v4.1.0
     ENABLE_ACCOUNT_SIGNUP: "false"
     INSTALLATION_ENV: "docker"
     FORCE_SSL: "true"
@@ -63,7 +64,7 @@ services:
       && bundle exec rails db:migrate
     environment:
       <<: *variaveis
-    image:  #chatwoot/chatwoot:v4.1.0
+    image:  chatwoot/chatwoot:${VERSION:-v4.1.0}
     entrypoint: docker/entrypoints/rails.sh
     # Após deploy trocar os comandos comentando, o prepare cria as tabelas do banco de dados e segundo expõe e executa o frontend na porta 3000 do container
     deploy: 
@@ -97,7 +98,7 @@ services:
   chatwoot_worker: 
     environment: 
       <<: *variaveis
-    image: chatwoot/chatwoot:v4.1.0
+    image: chatwoot/chatwoot:${VERSION:-v4.1.0}
     command: bundle exec sidekiq -C config/sidekiq.yml
     volumes: 
       - chatwoot_data:/app/storage
