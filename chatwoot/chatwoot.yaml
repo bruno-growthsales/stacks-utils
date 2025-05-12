@@ -88,7 +88,7 @@ services:
           memory: 2048M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.chatwoot.rule='Host(`${SUBDOMAIN}.${DOMAIN}`, `www.${SUBDOMAIN}.${DOMAIN}`)'
+        - traefik.http.routers.chatwoot.rule=Host(`${SUBDOMAIN}.${DOMAIN}`, `www.${SUBDOMAIN}.${DOMAIN}`)
         - traefik.http.routers.chatwoot.entrypoints=web,websecure
         - traefik.http.routers.chatwoot.tls.certresolver=letsencryptresolver
         - traefik.http.routers.chatwoot.priority=1
