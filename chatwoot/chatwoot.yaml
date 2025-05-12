@@ -1,7 +1,7 @@
 x-variaveis: &variaveis
   # Configurações gerais do Chatwoot
+  INSTALLATION_NAME: "${SUA_EMPRESA}"
   CHATWOOT_HUB_URL: "https://${SUBDOMAIN}.${DOMAIN}"
-  INSTALLATION_NAME: Chatwoot
   NODE_ENV: ${NODE_ENV:-production}
   RAILS_ENV: ${RAILS_ENV:-production}
   INSTALLATION_ENV: docker
@@ -24,7 +24,7 @@ x-variaveis: &variaveis
   # Configuração do banco de dados PostgreSQL
   POSTGRES_HOST: postgres
   POSTGRES_USERNAME: postgres
-  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-"senha_do_postgres"}
+  POSTGRES_PASSWORD: ${SENHA_POSTGRES:-"senha_do_postgres"}
   POSTGRES_DATABASE: chatwoot
 
   # Ajustes de performance
@@ -58,7 +58,10 @@ x-variaveis: &variaveis
 services:
   chatwoot:
     image: chatwoot/chatwoot:v4.1.0
-    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    command: >
+      sh -c "bundle exec rails db:chatwoot_prepare
+      && bundle exec rails s -p 3000 -b 0.0.0.0"
+      && bundle exec rails db:migrate"
     entrypoint: docker/entrypoints/rails.sh
     volumes:
       - chatwoot_data:/app/storage
