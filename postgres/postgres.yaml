@@ -3,7 +3,7 @@ version: "3.8"
 services:
   postgres:
     # 1) imagem já com pgvector instalado
-    image: pgvector/pgvector:pg15
+    image: pgvector/pgvector
     command:
       - postgres
       - --shared_preload_libraries=pgvector   # 2) carrega extensão
