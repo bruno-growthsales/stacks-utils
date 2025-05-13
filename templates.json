@@ -672,6 +672,639 @@
           "preset": false
         }
       ]
+    },
+    {
+      "type": 2,
+      "title": "13 | Ghost",
+      "name": "ghost",
+      "description": "O Ghost é uma plataforma de publicação de blogs de código aberto.",
+      "note": "Configuração do Ghost com Docker e MySQL integrado.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Ghost_Logo.svg?raw=true",
+      "website": "https://ghost.org",
+      "categories": [
+        "Blog",
+        "CMS"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "ghost/ghost.yml"
+      },
+      "env": [
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "label": "Senha root do MySQL",
+          "description": "Senha root do serviço MySQL usado pelo Ghost.",
+          "required": true,
+          "default": "myp@ssw0rd",
+          "preset": false
+        },
+        {
+          "name": "MYSQL_DATABASE",
+          "label": "Banco de dados do Ghost",
+          "description": "Nome do banco de dados que o Ghost usará.",
+          "required": false,
+          "default": "ghost",
+          "preset": false
+        },
+        {
+          "name": "MYSQL_USER",
+          "label": "Usuário do banco de dados do Ghost",
+          "description": "Usuário para conectar ao banco de dados Ghost.",
+          "required": false,
+          "default": "ghost",
+          "preset": false
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "label": "Senha do usuário do banco de dados",
+          "description": "Senha usada pelo usuário do banco de dados Ghost.",
+          "required": false,
+          "default": "myp@ssw0rd",
+          "preset": false
+        },
+        {
+          "name": "DOMAIN",
+          "label": "Domínio principal",
+          "description": "Domínio para acessar o Ghost.",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "14 | Mautic",
+      "name": "mautic",
+      "description": "O Mautic é uma plataforma de automação de marketing de código aberto.",
+      "note": "Configuração do Mautic com Docker, MariaDB e Traefik.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/1/14/Mautic_logo.svg?raw=true",
+      "website": "https://mautic.org",
+      "categories": [
+        "Marketing",
+        "Automation"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "mautic/mautic.yml"
+      },
+      "env": [
+        {
+          "name": "VERSION",
+          "label": "Versão do Mautic",
+          "description": "Versão da imagem do Mautic.",
+          "required": false,
+          "default": "v4",
+          "preset": false
+        },
+        {
+          "name": "SUBDOMAIN",
+          "label": "Subdomínio",
+          "description": "Subdomínio que será usado para acessar o Mautic.",
+          "required": true,
+          "default": "marketing",
+          "preset": false
+        },
+        {
+          "name": "DOMAIN",
+          "label": "Domínio principal do seu site",
+          "description": "Domínio principal do seu site.",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "SENHA_MARIADB",
+          "label": "Senha do MariaDB",
+          "description": "Senha do banco de dados MariaDB usado pelo Mautic.",
+          "required": true,
+          "default": "12345678",
+          "preset": false
+        },
+        {
+          "name": "MAUTIC_ADMIN_EMAIL",
+          "label": "Email do Administrador",
+          "description": "Email para acesso administrativo ao Mautic.",
+          "required": true,
+          "default": "seu-email@mail.com",
+          "preset": false
+        },
+        {
+          "name": "SENHA_MAUTIC",
+          "label": "Senha do Administrador",
+          "description": "Senha para acesso administrativo ao Mautic.",
+          "required": true,
+          "default": "12345678",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "15 | NocoDB",
+      "name": "nocodb",
+      "description": "O NocoDB é uma plataforma no-code de banco de dados que transforma qualquer banco SQL em um aplicativo inteligente.",
+      "note": "Configuração do NocoDB com PostgreSQL integrado e Traefik.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/26/NocoDB_Logo.png?raw=true",
+      "website": "https://nocodb.com",
+      "categories": [
+        "Database",
+        "No-Code"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "nocodb/nocodb.yml"
+      },
+      "env": [
+        {
+          "name": "VERSION",
+          "label": "Versão do NocoDB",
+          "description": "Versão da imagem do NocoDB.",
+          "required": false,
+          "default": "0.97.0",
+          "preset": false
+        },
+        {
+          "name": "DOMAIN",
+          "label": "Domínio principal do seu site",
+          "description": "Domínio principal do seu site.",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "SENHA_POSTGRES",
+          "label": "Senha do Postgres",
+          "description": "Senha do banco de dados PostgreSQL usado pelo NocoDB.",
+          "required": true,
+          "default": "98F8E4FD72762AD3F861435BA8E16",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "16 | Outline",
+      "name": "outline",
+      "description": "O Outline é uma plataforma de documentação e wiki intuitiva.",
+      "note": "Configuração do Outline com Docker, PostgreSQL e Redis.",
+      "logo": "https://images.saasworthy.com/saasworthy_prod/favicon/619987f3c7a33.png?raw=true",
+      "website": "https://www.getoutline.com",
+      "categories": [
+        "Documentation",
+        "Wiki"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "outline/outline.yaml"
+      },
+      "env": [
+        {
+          "name": "SECRET_KEY",
+          "label": "Chave secreta do Outline",
+          "description": "Chave secreta de configuração do Outline com pelo menos 32 caracteres.",
+          "required": true,
+          "default": "2f285edc6e69c8583d14ab29e38ad20323017b56ce02c2f34b6",
+          "preset": false
+        },
+        {
+          "name": "UTILS_SECRET",
+          "label": "Secret UTILS",
+          "description": "Token de utilitários do Outline com pelo menos 32 caracteres.",
+          "required": true,
+          "default": "c468283f0eb340a10b10921164f990c075368c1b945f39860",
+          "preset": false
+        },
+        {
+          "name": "SENHA_POSTGRES",
+          "label": "Senha do Postgres",
+          "description": "Senha do banco de dados PostgreSQL usado pelo Outline.",
+          "required": true,
+          "default": "98F8E4FD72762AD3F861435BA8E16",
+          "preset": false
+        },
+        {
+          "name": "SUBDOMAIN",
+          "label": "Subdomínio do Outline",
+          "description": "Subdomínio usado para acessar o Outline.",
+          "required": true,
+          "default": "docs",
+          "preset": false
+        },
+        {
+          "name": "DOMAIN",
+          "label": "Domínio principal do seu site",
+          "description": "Domínio principal do seu site.",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "17 | Passbolt",
+      "name": "passbolt",
+      "description": "O Passbolt é um gerenciador de senhas open source para equipes.",
+      "note": "Configuração do Passbolt com Docker, MariaDB e Traefik.",
+      "logo": "https://www.passbolt.com/static/50b30e4183ef436462f76838f5ae3ee8/8cf08/logo-horizontal.svg",
+      "website": "https://www.passbolt.com",
+      "categories": [
+        "Security",
+        "Credentials"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "passbolt/passbolt.yml"
+      },
+      "env": [
+        {
+          "name": "VERSION",
+          "label": "Versão do Passbolt",
+          "description": "Versão da imagem do Passbolt.",
+          "required": false,
+          "default": "3.2.1-2-ce",
+          "preset": false
+        },
+        {
+          "name": "DOMAIN",
+          "label": "Domínio do Passbolt",
+          "description": "Domínio usado para acessar o Passbolt.",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "SENHA_MARIADB",
+          "label": "Senha do MariaDB",
+          "description": "Senha do banco de dados MariaDB usado pelo Passbolt.",
+          "required": true,
+          "default": "12345678",
+          "preset": false
+        },
+        {
+          "name": "PASSBOLT_REGISTRATION_PUBLIC",
+          "label": "Registro público",
+          "description": "Habilitar registro público de usuários.",
+          "required": false,
+          "default": "false",
+          "preset": false
+        },
+        {
+          "name": "SMTP_SENDER",
+          "label": "Email remetente",
+          "description": "Email utilizado como remetente nas notificações do Passbolt.",
+          "required": true,
+          "default": "admin@example.com",
+          "preset": false
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "Host SMTP",
+          "description": "Servidor SMTP para envio de emails.",
+          "required": true,
+          "default": "smtp.seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "Porta SMTP",
+          "description": "Porta do servidor SMTP.",
+          "required": false,
+          "default": "587",
+          "preset": false
+        },
+        {
+          "name": "SMTP_USER",
+          "label": "Usuário SMTP",
+          "description": "Usuário para autenticação SMTP.",
+          "required": true,
+          "default": "seu-usuario@mail.com",
+          "preset": false
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "Senha SMTP",
+          "description": "Senha para autenticação SMTP.",
+          "required": true,
+          "default": "senha",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "18 | Traefik",
+      "name": "traefik",
+      "description": "O Traefik é um proxy reverso e load balancer moderno.",
+      "note": "Configuração do Traefik com Docker Swarm e ACME para certificados SSL.",
+      "logo": "https://raw.githubusercontent.com/containous/traefik/master/assets/img/logo/logo.png",
+      "website": "https://traefik.io",
+      "categories": [
+        "Proxy",
+        "Load-Balancer"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "traefik/traefik.yml"
+      },
+      "env": [
+        {
+          "name": "VERSION",
+          "label": "Versão do Traefik",
+          "description": "Versão da imagem do Traefik.",
+          "required": false,
+          "default": "v2.9.5",
+          "preset": false
+        },
+        {
+          "name": "ACME_EMAIL",
+          "label": "Email ACME",
+          "description": "Email para registro ACME (Let's Encrypt).",
+          "required": true,
+          "default": "admin@example.com",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "19 | Typebot",
+      "name": "typebot_novo",
+      "description": "O Typebot é uma plataforma de criação de chatbots low-code.",
+      "note": "Configuração do Typebot com Docker, PostgreSQL, SMTP e S3.",
+      "logo": "https://marketplace.visualstudio.com/_apis/public/gallery/publisher/elestio/extension/typebot-builder/2.27.0/assetbyname/Microsoft.VisualStudio.Services.Icons.Default",
+      "website": "https://typebot.io",
+      "categories": [
+        "Chatbot",
+        "Low-Code"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "typebot_novo/typebot.yaml"
+      },
+      "env": [
+        {
+          "name": "SENHA_POSTGRES",
+          "label": "Senha do Postgres",
+          "description": "Senha do banco de dados PostgreSQL usado pelo Typebot.",
+          "required": true,
+          "default": "98F8E4FD72762AD3F861435BA8E16",
+          "preset": false
+        },
+        {
+          "name": "SUBDOMAIN",
+          "label": "Subdomínio do Typebot",
+          "description": "Subdomínio usado para acessar o Typebot.",
+          "required": true,
+          "default": "typebot",
+          "preset": false
+        },
+        {
+          "name": "DOMAIN",
+          "label": "Domínio principal do seu site",
+          "description": "Domínio principal do seu site.",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "ADMIN_EMAIL",
+          "label": "Email do Administrador",
+          "description": "Email para acesso administrativo ao Typebot.",
+          "required": true,
+          "default": "seu-email@mail.com",
+          "preset": false
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "Host SMTP",
+          "description": "Servidor SMTP para envio de emails.",
+          "required": true,
+          "default": "smtp.seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "Usuário SMTP",
+          "description": "Usuário para autenticação SMTP.",
+          "required": true,
+          "default": "seu-usuario@mail.com",
+          "preset": false
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "Senha SMTP",
+          "description": "Senha para autenticação SMTP.",
+          "required": true,
+          "default": "senha",
+          "preset": false
+        },
+        {
+          "name": "S3_ACCESS_KEY",
+          "label": "Access Key do S3",
+          "description": "Access key para o serviço S3 (Minio).",
+          "required": true,
+          "default": "",
+          "preset": false
+        },
+        {
+          "name": "S3_SECRET_KEY",
+          "label": "Secret Key do S3",
+          "description": "Secret key para o serviço S3 (Minio).",
+          "required": true,
+          "default": "",
+          "preset": false
+        },
+        {
+          "name": "S3_ENDPOINT",
+          "label": "Endpoint do S3",
+          "description": "Endpoint do serviço S3 (Minio).",
+          "required": true,
+          "default": "s3.seudominio.com.br",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "20 | WordPress",
+      "name": "wordpress",
+      "description": "O WordPress é um CMS popular para criação de sites e blogs.",
+      "note": "Configuração do WordPress com Docker, Apache e MySQL.",
+      "logo": "https://s.w.org/style/images/about/WordPress-logotype-standard.png",
+      "website": "https://wordpress.org",
+      "categories": [
+        "CMS",
+        "Blog"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "wordpress/wordpress.yaml"
+      },
+      "env": [
+        {
+          "name": "WORDPRESS_DB_NAME",
+          "label": "Nome do banco de dados",
+          "description": "Nome do banco de dados que o WordPress usará.",
+          "required": false,
+          "default": "wp_database",
+          "preset": false
+        },
+        {
+          "name": "WORDPRESS_DB_HOST",
+          "label": "Host do banco de dados",
+          "description": "Host do MySQL para o WordPress.",
+          "required": false,
+          "default": "mysql",
+          "preset": false
+        },
+        {
+          "name": "WORDPRESS_DB_USER",
+          "label": "Usuário do banco de dados",
+          "description": "Usuário do MySQL para o WordPress.",
+          "required": false,
+          "default": "root",
+          "preset": false
+        },
+        {
+          "name": "WORDPRESS_DB_PASSWORD",
+          "label": "Senha do banco de dados",
+          "description": "Senha do MySQL para o WordPress.",
+          "required": true,
+          "default": "root_password",
+          "preset": false
+        },
+        {
+          "name": "VIRTUAL_HOST",
+          "label": "Host Virtual",
+          "description": "Subdomínio completo para o WordPress.",
+          "required": true,
+          "default": "wordpress.seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "ADMIN_USER",
+          "label": "Usuário Admin",
+          "description": "Usuário administrador do WordPress.",
+          "required": true,
+          "default": "admin",
+          "preset": false
+        },
+        {
+          "name": "ADMIN_PASS",
+          "label": "Senha Admin",
+          "description": "Senha do usuário administrador do WordPress.",
+          "required": true,
+          "default": "password124",
+          "preset": false
+        },
+        {
+          "name": "ADMIN_EMAIL",
+          "label": "Email Admin",
+          "description": "Email do usuário administrador do WordPress.",
+          "required": true,
+          "default": "seu_email@mail.com",
+          "preset": false
+        },
+        {
+          "name": "WP_LOCALE",
+          "label": "Locale",
+          "description": "Configuração de idioma do WordPress.",
+          "required": false,
+          "default": "pt_BR",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "21 | WPPConnect",
+      "name": "wppconnect",
+      "description": "O WPPConnect é uma API CLI para integrar WhatsApp em aplicações.",
+      "note": "Configuração do WPPConnect com Docker e Traefik.",
+      "logo": "https://wppconnect.io/logo.png",
+      "website": "https://wppconnect.io",
+      "categories": [
+        "WhatsApp",
+        "API",
+        "CLI"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "wppconnect/wppconnect.yml"
+      },
+      "env": [
+        {
+          "name": "DOMINIO",
+          "label": "Domínio",
+          "description": "Domínio usado para acessar o WPPConnect.",
+          "required": true,
+          "default": "wppconnect.seudominio.com.br",
+          "preset": false
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "title": "22 | Portainer",
+      "name": "portainer",
+      "description": "Portainer CE é uma interface de gerenciamento de containers Docker.",
+      "note": "Configuração do Portainer em Docker Swarm com agente e Traefik.",
+      "logo": "https://raw.githubusercontent.com/portainer/portainer/master/dist/assets/logo.png",
+      "website": "https://portainer.io",
+      "categories": [
+        "Management",
+        "GUI"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "portainer/portainer.yml"
+      },
+      "env": [
+        {
+          "name": "SUBDOMAIN",
+          "label": "Subdomínio",
+          "description": "Subdomínio usado para acessar o Portainer.",
+          "required": true,
+          "default": "portainer",
+          "preset": false
+        },
+        {
+          "name": "DOMAIN",
+          "label": "Domínio principal do seu site",
+          "description": "Domínio principal do seu site.",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "IMAGE",
+          "label": "Imagem do Portainer",
+          "description": "Imagem Docker do Portainer CE.",
+          "required": false,
+          "default": "portainer/portainer-ce",
+          "preset": false
+        },
+        {
+          "name": "VERSION",
+          "label": "Versão do Portainer",
+          "description": "Versão da imagem do Portainer CE.",
+          "required": false,
+          "default": "2.16.2-alpine",
+          "preset": false
+        }
+      ]
     }
   ]
 }
