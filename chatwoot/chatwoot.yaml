@@ -39,15 +39,35 @@ x-variaveis: &variaveis
   # OPENAI_API_KEY: ${OPENAI:-sk-exampleopenaiapikey}
 
   # Servidor de Email Brevo
-  MAILER_SENDER_EMAIL: "Chat - ${SUA_EMPRESA} <noreply@${DOMAIN}>"
-  SMTP_DOMAIN: "smtp-brevo.com"
+  
+  MAILER_SENDER_EMAIL: "Chat – ${SUA_EMPRESA} <no-repply@${DOMAIN}>"  
+  
+  # não o host do Brevo:
+  SMTP_DOMAIN: "${DOMAIN}"  
+  # para evitar rejeições por SPF/DKIM  [oai_citation:1‡Private.coffee Git](https://git.private.coffee/KumiSystems/Chatwoot/src/commit/18cea3b0acbf20cb0de34a1ecc42df5768a728ac/.env.example?utm_source=chatgpt.com)
+  
+  # 3) Endereço e porta do Brevo:
   SMTP_ADDRESS: "smtp-relay.brevo.com"
-  SMTP_PORT: '587'
+  SMTP_PORT: "587"
+  
   SMTP_USERNAME: "${SMTP_USERNAME}"
   SMTP_PASSWORD: "${SMTP_PASSWORD}"
-  SMTP_ENABLE_STARTTLS_AUTO: 'true'
-  SMTP_OPENSSL_VERIFY_MODE: 'peer'
-  MAILER_INBOUND_EMAIL_DOMAIN: "noreply@${DOMAIN}"
+  
+  #Mode de autenticação (muitos provedores exigem “plain”):
+  SMTP_AUTHENTICATION: "plain"            # plain, login, cram_md5, etc.
+  
+  # 6) TLS e verificação SSL:
+  SMTP_ENABLE_STARTTLS_AUTO: "true"
+  SMTP_OPENSSL_VERIFY_MODE: "peer"
+  
+  # 7) Inbound (se você usar reply-via-email/persistência de conversa):
+  #    – MAILER_INBOUND_EMAIL_DOMAIN deve ser só o domínio (ex: zapefy.com), não o endereço completo
+  #    – Configure também RAILS_INBOUND_EMAIL_SERVICE e a senha/chave do seu serviço de ingresso
+  MAILER_INBOUND_EMAIL_DOMAIN: "${DOMAIN}"  
+  # e.g.
+  # RAILS_INBOUND_EMAIL_SERVICE: "relay"
+  # RAILS_INBOUND_EMAIL_PASSWORD: "${RAILS_INBOUND_EMAIL_PASSWORD}" 
+
 
   # Botão AUTH Google na tela de login
   # GOOGLE_OAUTH_CLIENT_ID: ${G_CLIENT_ID:-example.apps.googleusercontent.com}
@@ -69,7 +89,7 @@ services:
       # Pasta com os arquivos do frontend (favicon, logo e outras)
       - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
       - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
-      #- /root/custom/chatwoot_hub.rb:/app/lib/chatwoot_hub.rb ## Arquivo de hub
+      - /root/custom/chatwoot_hub.rb:/app/lib/chatwoot_hub.rb
     networks:
       - externa
       - interna
@@ -88,7 +108,8 @@ services:
           memory: 2048M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.chatwoot.rule=Host(`${SUBDOMAIN}.${DOMAIN}`, `www.${SUBDOMAIN}.${DOMAIN}`)
+        # - traefik.http.routers.chatwoot.rule='Host(`${SUBDOMAIN}.${DOMAIN}`, `www.${SUBDOMAIN}.${DOMAIN}`)'
+        - traefik.http.routers.chatwoot.rule=Host(`chat.zapefy.com`, `www.chat.zapefy.com`)
         - traefik.http.routers.chatwoot.entrypoints=web,websecure
         - traefik.http.routers.chatwoot.tls.certresolver=letsencryptresolver
         - traefik.http.routers.chatwoot.priority=1
