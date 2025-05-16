@@ -1,0 +1,110 @@
+version: '3.8'
+
+x-variaveis: &variaveis
+  POSTGRES_CONNECTION_STRING: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/evo_ai
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  REDIS_PASSWORD: ${REDIS_PASSWORD:-""}
+  REDIS_SSL: "false"
+  REDIS_KEY_PREFIX: "a2a:"
+  REDIS_TTL: 3600
+  JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+  SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+  EMAIL_FROM: ${EMAIL_FROM}
+  APP_URL: ${APP_URL}
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  DEBUG: ${DEBUG:-false}
+
+services:
+  api:
+    image: evo-ai-api:latest
+    build: .
+    container_name: evo-ai-api
+    ports:
+      - "8000:8000"
+    environment:
+      <<: *variaveis
+    volumes:
+      - ./logs:/app/logs
+      - ./static:/app/static
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+    networks:
+      - interna
+
+  frontend:
+    image: evoapicloud/evo-ai-frontend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    volumes:
+      - ./docker-entrypoint.sh:/docker-entrypoint.sh
+    restart: unless-stopped
+    networks:
+      - interna
+
+# Optional Postgres and Redis services
+# Uncomment these if you don't have existing Postgres and Redis stacks
+#
+#  postgres:
+#    image: postgres:14-alpine
+#    container_name: evo-ai-postgres
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+#      POSTGRES_DB: evo_ai
+#    ports:
+#      - "${POSTGRES_PORT:-5432}:5432"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    restart: unless-stopped
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U postgres"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#      start_period: 10s
+#    networks:
+#      - interna
+#
+#  redis:
+#    image: redis:alpine
+#    container_name: evo-ai-redis
+#    command: redis-server --appendonly yes ${REDIS_PASSWORD:+--requirepass ${REDIS_PASSWORD}}
+#    ports:
+#      - "${REDIS_PORT:-6379}:6379"
+#    volumes:
+#      - redis_data:/data
+#    restart: unless-stopped
+#    healthcheck:
+#      test: ["CMD", "redis-cli", "ping"]
+#      interval: 5s
+#      timeout: 30s
+#      retries: 50
+#    networks:
+#      - interna
+
+networks:
+  interna:
+    external: true
+
+# Uncomment below volumes if you enable the optional Postgres and Redis services
+#volumes:
+#  postgres_data:
+#    external: true
+#  redis_data:
+#    external: true
+
+# Database initialization
+# If you don't have the required tables in Postgres, ensure your existing 'entrypoint_postgres' script or migrations
+# create them, or run:
+#  docker compose -f docker-compose.yml run api your-migration-command 

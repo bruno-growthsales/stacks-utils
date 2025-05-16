@@ -1305,6 +1305,99 @@
           "preset": false
         }
       ]
+    },
+    {
+      "type": 2,
+      "title": "23 | Evo AI",
+      "name": "evo-ai",
+      "description": "Stack para rodar o frontend (Next.js) e backend (API) do Evo AI.",
+      "note": "Configuração do Docker Compose para os serviços de API e frontend da Evo AI, com Postgres e Redis opcionais.",
+      "logo": "https://raw.githubusercontent.com/EvolutionAPI/evo-ai/main/public/logo.png?raw=true",
+      "website": "https://github.com/EvolutionAPI/evo-ai",
+      "categories": [
+        "AI",
+        "Frontend",
+        "API"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/bruno-growthsales/stacks-utils",
+        "stackfile": "evo-ai/evo-ai.yaml"
+      },
+      "env": [
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "Senha do Postgres",
+          "description": "Senha para o banco de dados PostgreSQL",
+          "required": false,
+          "default": "postgres",
+          "preset": false
+        },
+        {
+          "name": "REDIS_PASSWORD",
+          "label": "Senha do Redis",
+          "description": "Senha para o banco de dados Redis",
+          "required": false,
+          "default": "",
+          "preset": false
+        },
+        {
+          "name": "JWT_SECRET_KEY",
+          "label": "Chave JWT",
+          "description": "Segredo para assinatura de tokens JWT",
+          "required": true,
+          "default": "",
+          "preset": false
+        },
+        {
+          "name": "SENDGRID_API_KEY",
+          "label": "SendGrid API Key",
+          "description": "Chave API para envio de e-mails via SendGrid",
+          "required": false,
+          "default": "",
+          "preset": false
+        },
+        {
+          "name": "EMAIL_FROM",
+          "label": "Email de Origem",
+          "description": "Endereço de e-mail remetente padrão",
+          "required": false,
+          "default": "",
+          "preset": false
+        },
+        {
+          "name": "APP_URL",
+          "label": "URL do App",
+          "description": "URL pública da aplicação",
+          "required": false,
+          "default": "http://localhost:3000",
+          "preset": false
+        },
+        {
+          "name": "LOG_LEVEL",
+          "label": "Nível de Log",
+          "description": "Nível de log para a aplicação",
+          "required": false,
+          "default": "INFO",
+          "preset": false
+        },
+        {
+          "name": "DEBUG",
+          "label": "Debug",
+          "description": "Habilitar modo de debug",
+          "required": false,
+          "default": "false",
+          "preset": false
+        },
+        {
+          "name": "NEXT_PUBLIC_API_URL",
+          "label": "URL da API",
+          "description": "URL da API usada pelo frontend",
+          "required": false,
+          "default": "http://localhost:8000",
+          "preset": false
+        }
+      ]
     }
   ]
 }
