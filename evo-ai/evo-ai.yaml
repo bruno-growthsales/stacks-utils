@@ -19,7 +19,7 @@ x-variaveis: &variaveis
   REDIS_HOST: redis
   REDIS_PORT: 6379
   REDIS_PASSWORD:
-  REDIS_SSL: false
+  REDIS_SSL: ${REDIS_SSL:-false}
   REDIS_KEY_PREFIX: evoai
   REDIS_TTL: 3600
   # Cache de Ferramentas
@@ -46,12 +46,12 @@ x-variaveis: &variaveis
   # Credenciais de SMTP
   EMAIL_PROVIDER: smtp
   SMTP_HOST: smtp.gmail.com
-  SMTP_FROM: seuemail@gmail.com
-  SMTP_USER: seuemail@gmail.com
-  SMTP_PASSWORD: suasenhadeapp
-  SMTP_PORT: 587
-  SMTP_USE_TLS: true
-  SMTP_USE_SSL: false
+  SMTP_FROM: ${SMTP_FROM:-seuemail@gmail.com}
+  SMTP_USER: ${SMTP_USER:-seuemail@gmail.com}
+  SMTP_PASSWORD: ${SMTP_PASSWORD:-suasenhadeapp}
+  SMTP_PORT: ${SMTP_PORT:-587}
+  SMTP_USE_TLS: ${SMTP_USE_TLS:-true}
+  SMTP_USE_SSL: ${SMTP_USE_SSL:-false}
 
 
 services:
