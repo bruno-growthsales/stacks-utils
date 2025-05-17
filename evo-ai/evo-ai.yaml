@@ -30,8 +30,8 @@ x-variaveis: &variaveis
   JWT_ALGORITHM: HS256
   JWT_EXPIRATION_TIME: 3600
   # Criptografia
-  ENCRYPTION_KEY: ${ENCRYPTION_KEY:-BdbhN5D4E2hL3xY5-KlwoabpM2e9G4jFv0ZPqywM-n9=}
-  SECRET_KEY: ${SECRET_KEY:-BdbhN5D4E2hL3xY5-KlwoabpM2e9G4jFv0ZPqywM-n9=}
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY:-RdbhN5D4E2hL3xY5-KlwoabpM2e9G4jFv0ZPqywM-n9=}
+  SECRET_KEY: ${SECRET_KEY:-RdbhN5D4E2hL3xY5-KlwoabpM2e9G4jFv0ZPqywM-n9=}
   PYTHONPATH: /app/src
   LOG_LEVEL: INFO
   # Servidor
@@ -44,10 +44,16 @@ x-variaveis: &variaveis
   DEMO_EMAIL: ${DEMO_EMAIL:-demo@example.com}
   DEMO_PASSWORD: ${DEMO_PASSWORD:-demo123}
   DEMO_CLIENT_NAME: ${DEMO_CLIENT_NAME:-DemoClient}
+  # Servidor de Email Brevo
   # Credenciais de SMTP
   EMAIL_PROVIDER: smtp
-  SMTP_HOST: smtp.gmail.com
+  SMTP_DOMAIN: "${DOMAIN}" 
+  SMTP_HOST: ${SMTP_HOST}
   SMTP_FROM: ${SMTP_FROM:-seuemail@gmail.com}
+  SMTP_AUTHENTICATION: 'plain'
+  # 6) TLS e verificação SSL:
+  SMTP_ENABLE_STARTTLS_AUTO: "true"
+  SMTP_OPENSSL_VERIFY_MODE: "peer"
   SMTP_USER: ${SMTP_USER:-seuemail@gmail.com}
   SMTP_PASSWORD: ${SMTP_PASSWORD:-suasenhadeapp}
   SMTP_PORT: ${SMTP_PORT:-587}
@@ -62,6 +68,9 @@ services:
     #  - "8000:8000"
     environment:
       <<: *variaveis
+      SERVER_HOST: "${SUBDOMAIN_EVOAPI}.${DOMAIN}"
+      SERVER_PORT: "443"
+      SERVER_PROTOCOL: "https"
     volumes:
       - evoai_data:/evoai/data
     restart: unless-stopped
