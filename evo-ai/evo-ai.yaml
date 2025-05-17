@@ -36,7 +36,7 @@ x-variaveis: &variaveis
   # Servidor
   HOST: 0.0.0.0
   PORT: 8000
-  DEBUG: false
+  DEBUG: ${DEBUG:-false}
   # Admin demo config
   ADMIN_EMAIL: ${ADMIN_EMAIL:-adm@example.com}
   ADMIN_INITIAL_PASSWORD: ${ADMIN_INITIAL_PASSWORD:-SuaSenhaAdm}
