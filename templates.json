@@ -1326,6 +1326,62 @@
       },
       "env": [
         {
+          "name": "DOMAIN",
+          "label": "Domínio principal",
+          "description": "Domínio principal do seu site",
+          "required": true,
+          "default": "seudominio.com.br",
+          "preset": false
+        },
+        {
+          "name": "SUBDOMAIN_EVOAPI",
+          "label": "Subdomínio da API",
+          "description": "Subdomínio usado para acessar o serviço de API",
+          "required": true,
+          "default": "api",
+          "preset": false
+        },
+        {
+          "name": "SUBDOMAIN_EVOFRONT",
+          "label": "Subdomínio do Frontend",
+          "description": "Subdomínio usado para acessar o frontend",
+          "required": true,
+          "default": "front",
+          "preset": false
+        },
+        {
+          "name": "API_TITLE",
+          "label": "Título da API",
+          "description": "Título exibido na documentação da API",
+          "required": false,
+          "default": "Evo API",
+          "preset": false
+        },
+        {
+          "name": "API_DESCRIPTION",
+          "label": "Descrição da API",
+          "description": "Descrição exibida na documentação da API",
+          "required": false,
+          "default": "API para execução de agentes de IA",
+          "preset": false
+        },
+        {
+          "name": "API_VERSION",
+          "label": "Versão da API",
+          "description": "Versão da API",
+          "required": false,
+          "default": "1.0.0",
+          "preset": false
+        },
+        {
+          "name": "ORGANIZATION_NAME",
+          "label": "Nome da Organização",
+          "description": "Nome da organização usuária da API",
+          "required": false,
+          "default": "Evo AI",
+          "preset": false
+        },
+        {
           "name": "POSTGRES_PASSWORD",
           "label": "Senha do Postgres",
           "description": "Senha para o banco de dados PostgreSQL",
@@ -1350,51 +1406,123 @@
           "preset": false
         },
         {
-          "name": "SENDGRID_API_KEY",
-          "label": "SendGrid API Key",
-          "description": "Chave API para envio de e-mails via SendGrid",
+          "name": "ENCRYPTION_KEY",
+          "label": "Chave de Criptografia",
+          "description": "Chave para encriptação de dados",
           "required": false,
           "default": "",
           "preset": false
         },
         {
-          "name": "EMAIL_FROM",
-          "label": "Email de Origem",
-          "description": "Endereço de e-mail remetente padrão",
+          "name": "SECRET_KEY",
+          "label": "Chave Secreta",
+          "description": "Chave secreta para frameworks",
           "required": false,
           "default": "",
           "preset": false
         },
         {
-          "name": "APP_URL",
-          "label": "URL do App",
-          "description": "URL pública da aplicação",
+          "name": "ADMIN_EMAIL",
+          "label": "Email Admin",
+          "description": "Email do administrador",
           "required": false,
-          "default": "http://localhost:3000",
+          "default": "adm@example.com",
           "preset": false
         },
         {
-          "name": "LOG_LEVEL",
-          "label": "Nível de Log",
-          "description": "Nível de log para a aplicação",
+          "name": "ADMIN_INITIAL_PASSWORD",
+          "label": "Senha Admin Inicial",
+          "description": "Senha inicial do administrador",
           "required": false,
-          "default": "INFO",
+          "default": "SuaSenhaAdm",
           "preset": false
         },
         {
-          "name": "DEBUG",
-          "label": "Debug",
-          "description": "Habilitar modo de debug",
+          "name": "DEMO_EMAIL",
+          "label": "Email Demo",
+          "description": "Email de usuário demo",
+          "required": false,
+          "default": "demo@example.com",
+          "preset": false
+        },
+        {
+          "name": "DEMO_PASSWORD",
+          "label": "Senha Demo",
+          "description": "Senha de usuário demo",
+          "required": false,
+          "default": "demo123",
+          "preset": false
+        },
+        {
+          "name": "DEMO_CLIENT_NAME",
+          "label": "Nome do Cliente Demo",
+          "description": "Nome do cliente demo",
+          "required": false,
+          "default": "DemoClient",
+          "preset": false
+        },
+        {
+          "name": "EMAIL_PROVIDER",
+          "label": "Provedor de Email",
+          "description": "Provedor SMTP para envio de emails",
+          "required": false,
+          "default": "smtp",
+          "preset": false
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP Host",
+          "description": "Servidor SMTP para envio de emails",
+          "required": false,
+          "default": "smtp.gmail.com",
+          "preset": false
+        },
+        {
+          "name": "SMTP_FROM",
+          "label": "SMTP From",
+          "description": "Endereço de e-mail remetente",
+          "required": false,
+          "default": "seuemail@gmail.com",
+          "preset": false
+        },
+        {
+          "name": "SMTP_USER",
+          "label": "SMTP User",
+          "description": "Usuário SMTP",
+          "required": false,
+          "default": "seuemail@gmail.com",
+          "preset": false
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP Password",
+          "description": "Senha SMTP",
+          "required": false,
+          "default": "suasenhadeapp",
+          "preset": false
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP Port",
+          "description": "Porta SMTP",
+          "required": false,
+          "default": "587",
+          "preset": false
+        },
+        {
+          "name": "SMTP_USE_TLS",
+          "label": "SMTP TLS",
+          "description": "Habilitar TLS no SMTP",
+          "required": false,
+          "default": "true",
+          "preset": false
+        },
+        {
+          "name": "SMTP_USE_SSL",
+          "label": "SMTP SSL",
+          "description": "Habilitar SSL no SMTP",
           "required": false,
           "default": "false",
-          "preset": false
-        },
-        {
-          "name": "NEXT_PUBLIC_API_URL",
-          "label": "URL da API",
-          "description": "URL da API usada pelo frontend",
-          "required": false,
-          "default": "http://localhost:8000",
           "preset": false
         }
       ]

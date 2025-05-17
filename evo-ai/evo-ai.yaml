@@ -1,32 +1,68 @@
 version: '3.8'
 
+#  Repositorio Evo ai api: https://github.com/EvolutionAPI/evo-ai
+#  Repositorio Evo AI Front: https://github.com/EvolutionAPI/evo-ai-frontend
+
 x-variaveis: &variaveis
-  POSTGRES_CONNECTION_STRING: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/evo_ai
+  # Metadados da API
+  API_TITLE: Evo API
+  API_DESCRIPTION: API para execução de agentes de IA
+  API_VERSION: 1.0.0
+  DOMAIN: ${DOMAIN:-seudominio.com.br}
+  SUBDOMAIN_EVOAPI: ${SUBDOMAIN_EVOAPI:-api}
+  API_URL: "https://${SUBDOMAIN_EVOAPI}.${DOMAIN}"
+  # Organização
+  ORGANIZATION_NAME: ${ORGANIZATION_NAME:-Evo AI}
+  ORGANIZATION_URL: "https://${SUBDOMAIN_EVOAPI}.${DOMAIN}"
+  # Banco de Dados
+  POSTGRES_CONNECTION_STRING: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/evo_ai # TODO: Verificar se é necessário
   REDIS_HOST: redis
   REDIS_PORT: 6379
-  REDIS_PASSWORD: ${REDIS_PASSWORD:-""}
-  REDIS_SSL: "false"
-  REDIS_KEY_PREFIX: "a2a:"
+  REDIS_PASSWORD:
+  REDIS_SSL: false
+  REDIS_KEY_PREFIX: evoai
   REDIS_TTL: 3600
-  JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-  SENDGRID_API_KEY: ${SENDGRID_API_KEY}
-  EMAIL_FROM: ${EMAIL_FROM}
-  APP_URL: ${APP_URL}
-  LOG_LEVEL: ${LOG_LEVEL:-INFO}
-  DEBUG: ${DEBUG:-false}
+  # Cache de Ferramentas
+  TOOLS_CACHE_TTL: 3600
+  # JWT
+  JWT_SECRET_KEY: ${JWT_SECRET_KEY:-DE3fdcc60d45985b5a0c99155b9903724a}
+  JWT_ALGORITHM: HS256
+  JWT_EXPIRATION_TIME: 3600
+  # Criptografia
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY:-DEnI6o981Motm2vRwq6djoNv6H8AA2Jt9ZoULqcjfWV0g=}
+  SECRET_KEY: ${SECRET_KEY:-DEnI6o98Nv6m2vR1Mot6djowqH8AA2Jt9ZoULqcjfWV0g=}
+  PYTHONPATH: /app/src
+  LOG_LEVEL: INFO
+  # Servidor
+  HOST: 0.0.0.0
+  PORT: 8000
+  DEBUG: false
+  # Admin demo config
+  ADMIN_EMAIL: ${ADMIN_EMAIL:-adm@example.com}
+  ADMIN_INITIAL_PASSWORD: ${ADMIN_INITIAL_PASSWORD:-SuaSenhaAdm}
+  DEMO_EMAIL: ${DEMO_EMAIL:-demo@example.com}
+  DEMO_PASSWORD: ${DEMO_PASSWORD:-demo123}
+  DEMO_CLIENT_NAME: ${DEMO_CLIENT_NAME:-DemoClient}
+  # Credenciais de SMTP
+  EMAIL_PROVIDER: smtp
+  SMTP_HOST: smtp.gmail.com
+  SMTP_FROM: seuemail@gmail.com
+  SMTP_USER: seuemail@gmail.com
+  SMTP_PASSWORD: suasenhadeapp
+  SMTP_PORT: 587
+  SMTP_USE_TLS: true
+  SMTP_USE_SSL: false
+
 
 services:
-  api:
-    image: evo-ai-api:latest
-    build: .
-    container_name: evo-ai-api
+  evoapi:
+    image: evoapicloud/evo-ai:homolog
     ports:
       - "8000:8000"
     environment:
       <<: *variaveis
     volumes:
-      - ./logs:/app/logs
-      - ./static:/app/static
+      - evoai_data:/evoai/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/"]
@@ -36,21 +72,46 @@ services:
       start_period: 15s
     networks:
       - interna
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.evoapi.rule=Host(`${SUBDOMAIN_EVOAPI}.${DOMAIN}`, `WWW.${SUBDOMAIN_EVOAPI}.${DOMAIN}`)
+        - traefik.http.services.evoapi.loadbalancer.server.port=8000
+        - traefik.http.routers.evoapi.service=evoapi
+        - traefik.http.routers.evoapi.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evoapi.entrypoints=websecure
+        - traefik.http.routers.evoapi.tls=true
 
-  frontend:
+  evoaifront:
     image: evoapicloud/evo-ai-frontend:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8000
-    volumes:
-      - ./docker-entrypoint.sh:/docker-entrypoint.sh
     restart: unless-stopped
     networks:
       - interna
+    #ports:
+    #  - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      NEXT_PUBLIC_API_URL: "https://${SUBDOMAIN_EVOAPI}.${DOMAIN}"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.evoaifront.rule=Host(`${SUBDOMAIN-EVOFRONT}.${DOMAIN}`, `WWW.${SUBDOMAIN-EVOFRONT}.${DOMAIN}`)
+        - traefik.http.services.evoaifront.loadbalancer.server.port=3000
+        - traefik.http.routers.evoaifront.service=evoaifront
+        - traefik.http.routers.evoaifront.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evoaifront.entrypoints=websecure
+        - traefik.http.routers.evoaifront.tls=true
 
 # Optional Postgres and Redis services
 # Uncomment these if you don't have existing Postgres and Redis stacks
@@ -103,6 +164,11 @@ networks:
 #    external: true
 #  redis_data:
 #    external: true
+
+volumes:
+  evoai_data:
+    external: true
+    name: evoai_data
 
 # Database initialization
 # If you don't have the required tables in Postgres, ensure your existing 'entrypoint_postgres' script or migrations
